@@ -61,6 +61,10 @@ button {
         background-color: fonts.$color-green-link-hover;
     }
 }
+.invisible {
+    visibility: hidden;
+    opacity: 0;
+}
 
 body {
     background-color: configs.$color-white-secondary;
@@ -237,7 +241,7 @@ main {
         opacity: 1;
     }
 
-    z-index: 9999;
+    z-index: 999;
 
     .modal {
         background-color: configs.$color-white-secondary;
@@ -278,6 +282,23 @@ main {
             }
         }
     }
+}
+
+.alert {
+    width: 100%;
+    min-height: 50px;
+    position: absolute;
+    top: 0;
+
+    text-align: center;
+    background-color: configs.$color-red;
+    color: fonts.$color-secondary;
+
+    display: flex;
+    justify-content:center;
+    align-items: center;
+
+    z-index: 9999;
 }
 
 // Footer

@@ -12,7 +12,7 @@ A practical project applying knowledge acquired in the Rocketseat's Discover Cou
 * Transaction edit option
 * Automatically money format based on the navigator language (I'm starter)
 * Custom error message
-* 
+* Create new array if not exists the local data
 * Some different ways to do the JavaScript code
 
 ## Rockeseat and FCamara who am I?

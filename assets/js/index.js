@@ -3,7 +3,7 @@ const Storage = {
         localStorage.setItem('dev.finance:transactions', JSON.stringify(Transaction.all));
     },
     get() {
-        return JSON.parse(localStorage.getItem('dev.finance:transactions'));
+        return JSON.parse(localStorage.getItem('dev.finance:transactions')) || [];
     }
 }
 

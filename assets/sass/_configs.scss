@@ -1,0 +1,19 @@
+$color-white-primary: #fff;
+$color-white-secondary: #f0f2f5;
+$color-green-primary: #2D4A22;
+$color-green-secondary: #49AA26;
+
+$modal-overlay-color: #000000b3;
+
+@mixin reset {
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    html, body {
+        width: 100%;
+        height: 100%;
+        font-family: 'Poppins', sans-serif;
+    }
+}

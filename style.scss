@@ -1,0 +1,290 @@
+@use './assets/sass/configs';
+@use './assets/sass/fonts';
+@use './assets/sass/responsive';
+// Global settings
+@include configs.reset; //  RESET PAGE MARGINS
+
+.container {
+    width: min(90vw, 800px);
+    margin: auto;
+}
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border-width: 0;
+}
+.button {
+    &.new {
+        display: inline-block;
+        margin-bottom: 0.8rem;
+    }
+    &.cancel {
+        color: fonts.$color-red-table;
+        border: 2px fonts.$color-red-table solid;
+        border-radius: 0.25rem;
+
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        text-decoration: none;
+        opacity: 0.6;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+button {
+    width: 100%;
+    height: 50px;
+
+    border: none;
+
+    color: white;
+    background-color: configs.$color-green-secondary;
+
+    padding: 0;
+
+    border-radius: 0.25rem;
+
+    cursor: pointer;
+
+    &:hover {
+        background-color: fonts.$color-green-link-hover;
+    }
+}
+
+body {
+    background-color: configs.$color-white-secondary;
+}
+html {
+    font-size: 93.75%;
+}
+
+// Titles
+h2 {
+    margin-top: 3.2rem;
+    margin-bottom: 0.8rem;
+    color: fonts.$color-tertiary;
+    @include fonts.font-normal;
+}
+
+// Header
+header {
+    background-color: configs.$color-green-primary;
+    padding: 2rem 0 12rem;
+    text-align: center;
+
+    h1#logo {
+        color: fonts.$color-secondary;
+        @include fonts.font-thin;
+    }
+}
+
+// Content
+main {
+    
+    // Balance
+    section#balance {
+        margin-top: -6rem;
+
+        // Title
+        h2 {
+            color: fonts.$color-secondary;
+            margin-top: 0;
+        }
+
+        // Cards
+        .card {
+            background: configs.$color-white-primary;
+            padding: 1.5rem 2rem;
+            border-radius: 0.25rem;
+            margin-bottom: 2rem;
+
+            h3 {
+                @include fonts.font-normal;
+                font-size: 1rem;
+
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            p {
+                font-size: 2rem;
+                line-height: 3rem;
+            } 
+
+            &.green {
+                background: configs.$color-green-secondary;
+                color: fonts.$color-secondary;
+            }
+        }
+    }
+
+    // Transactions
+    section#transaction {
+        display: block;
+        overflow-x: auto;
+        width: 100%;
+        
+
+        table#data-table {
+            width: 100%;
+            border-spacing: 0 0.5rem;
+            color: fonts.$color-quaternary;
+
+            thead {
+
+                tr {
+
+                    th {
+                        @include fonts.font-normal;
+                        background: configs.$color-white-primary;
+                        padding: 1rem 2rem;
+                        text-align-last: left;
+                        
+                        &:first-child {
+                            border-radius: 0.25rem 0 0 0.25rem;
+                        }
+                        &:last-child {
+                            border-radius: 0 0.25rem 0.25rem 0;
+                        }
+                    }
+
+                }
+            }
+
+            tbody {
+                tr {
+                    td {
+                        background: configs.$color-white-primary;
+                        padding: 1rem 2rem;
+                       
+                        &:first-child {
+                            border-radius: 0.25rem 0 0 0.25rem;
+                        }
+                        &:last-child {
+                            border-radius: 0 0.25rem 0.25rem 0;
+                        }
+
+                        &.description {
+                            color: fonts.$color-tertiary;
+                        }
+
+                        &.income {
+                            color: fonts.$color-green-table;
+                        }
+
+                        &.expense {
+                            color: fonts.$color-red-table;
+                        }
+
+                        img {
+                            cursor: pointer;
+                        }
+                    }
+
+                    opacity: 0.7;
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+            }
+
+        }
+
+        // New transaction button
+        a {
+            color: fonts.$color-green-link;
+            text-decoration: none;
+
+            &:hover {
+                color: fonts.$color-green-link-hover;
+            }
+        }
+    }
+
+}
+
+// Modal 
+.modal-overlay {
+    width: 100%;
+    height: 100%;
+
+    background-color: configs.$modal-overlay-color;
+
+    position: fixed;
+    top: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    visibility: hidden;
+
+    &.active {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    z-index: 9999;
+
+    .modal {
+        background-color: configs.$color-white-secondary;
+        padding: 2.4rem;
+
+        width: min(500px, 90%);
+
+        .form {
+            margin-top: 0;
+
+            .input-group {
+                margin-top: 0.8rem;
+
+                input{
+                    border: none;
+                    border-radius: 0.2rem;
+                    padding: 0.8rem;
+
+                    width: 100%;
+                }
+
+                small {
+                    opacity: 0.4;
+                    color: fonts.$color-tertiary;
+                    font-size: 0.65rem;
+                    text-align: justify;
+                }
+
+                &.actions {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .button, button {
+                        width: 48%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Footer
+footer {
+    text-align: center;
+    padding: 4rem 0 2rem;
+    color: fonts.$color-tertiary;
+
+    opacity: 0.6;
+}

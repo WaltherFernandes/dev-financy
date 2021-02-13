@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&display=swap');
+
+$color-primary: #000;
+$color-secondary: #fff;
+$color-tertiary: #363f5f;
+$color-quaternary: #969cb3;
+
+$color-green-table: #12a454;
+$color-red-table: #e92929;
+$color-green-link: #49AA26;
+$color-green-link-hover: #3dd705;
+
+@mixin font-thin {
+    font-family: 'Poppins' ,sans-serif;
+    font-weight: 100;
+}
+@mixin font-normal {
+    font-family: 'Poppins' ,sans-serif;
+    font-weight: 400;
+}
+@mixin font-bold {
+    font-family: 'Poppins' ,sans-serif;
+    font-weight: 700;
+}

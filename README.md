@@ -3,15 +3,16 @@ A practical project applying knowledge acquired in the Rocketseat's Discover Cou
 
 
 <p align="center">
-<img src="https://i.imgur.com/Hlbdl5Z.png" />
+<img src="https://i.imgur.com/TxYz81n.png" />
 </p>
 
 ## Differences from the original project
 
-* Authoral project using SASS
+* Project using SASS
 * Transaction edit option
 * Automatically money format based on the navigator language (I'm starter)
 * Custom error message
+* 
 * Some different ways to do the JavaScript code
 
 ## Rockeseat and FCamara who am I?

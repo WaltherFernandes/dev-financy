@@ -181,6 +181,16 @@ main section#transaction table#data-table tbody tr td.expense {
 main section#transaction table#data-table tbody tr td img {
   cursor: pointer;
 }
+main section#transaction table#data-table tbody tr td.items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+main section#transaction table#data-table tbody tr td.items i {
+  margin-right: 1.4rem;
+  color: #005e08;
+  cursor: pointer;
+}
 main section#transaction table#data-table tbody tr:hover {
   opacity: 1;
 }

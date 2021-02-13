@@ -140,7 +140,6 @@ main {
         overflow-x: auto;
         width: 100%;
         
-
         table#data-table {
             width: 100%;
             border-spacing: 0 0.5rem;
@@ -194,6 +193,18 @@ main {
 
                         img {
                             cursor: pointer;
+                        }
+
+                        &.items{
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+
+                            i {
+                                margin-right: 1.4rem;
+                                color: fonts.$color-orange;
+                                cursor: pointer;
+                            }
                         }
                     }
 

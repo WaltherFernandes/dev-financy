@@ -1,46 +1,46 @@
+const Storage = {
+    save() {
+        localStorage.setItem('dev.finance:transactions', JSON.stringify(Transaction.all));
+    },
+    get() {
+        return JSON.parse(localStorage.getItem('dev.finance:transactions'));
+    }
+}
+
 const Modal = {
     open() {
         document.querySelector('div.modal-overlay').classList.add('active');
     },
     close() {
         document.querySelector('div.modal-overlay').classList.remove('active');
+        Form.clearFields();
+        document.querySelector('input#action').value = 'create'
     }
 }
 
-const transactions = [
-    {
-        description: 'Luz',
-        amount: -50000,
-        date: '23/01/2021'
-    },
-    {
-        description: 'Criação de Website',
-        amount: 500000,
-        date: '23/01/2021'
-    },
-    {
-        description: 'Internet',
-        amount: -20000,
-        date: '23/01/2021'
-    },
-    {
-        description: 'App',
-        amount: 200000,
-        date: '23/01/2021'
-    }
-];
-
 const Transaction = {
-    all: transactions,
+    all: Storage.get(),
     add(transaction) {
         this.all.push(transaction);
         App.reload();
+        Storage.save();
     }, 
     remove(index) {
         if(index >= this.all.length) reload;
         this.all.splice(index, 1);
 
         App.reload();
+        Storage.save();
+    },
+    replace(transaction, index) {
+        this.all[index] = transaction;
+        App.reload();
+        Storage.save();
+    },
+    edit(e) {
+        document.querySelector('input#action').value = `edit-${e.dataset.position}`;
+        Form.setFormEdit(this.all[e.dataset.position]);
+        Modal.open();
     },
     incomes() {
         // Sum incomes
@@ -76,8 +76,8 @@ let regionCode = 'BRL';
 const Utils = {
     formatCurrency(amount) {
         amount = Number(amount);
-        const signal = amount < 0 ? '-' : '';
-        amount = String(amount/100).replace('-', ' ');
+        const signal = amount < 0 ? '-' : ''; 
+        amount = String(amount/100).replace('-', '');
 
         const options = {style: 'currency', currency: regionCode}; // I created a personalized option for better maintenance code read
         amount = Number(amount).toLocaleString(navigator.language, options); // I used navigator language to format
@@ -91,6 +91,12 @@ const Utils = {
         const splittedDate = date.split('-');
         splittedDate.reverse();
         return splittedDate.join('/');
+    },
+    formatInverseDate(date = []){
+        date = date.split('/');
+        date = date.reverse();
+        date = date.join('-');
+        return date;
     }
 }
 
@@ -104,6 +110,11 @@ const Form = {
             amount: this.amount.value,
             date: this.date.value
         }
+    },
+    setFormEdit(transaction){
+        this.description.value = transaction.description;
+        this.amount.value = transaction.amount/100;
+        this.date.value = Utils.formatInverseDate(transaction.date);
     },
     validateFields(){
         const { description, amount, date } = this.getValues();
@@ -127,12 +138,20 @@ const Form = {
     },
     submit(event){
         event.preventDefault();
+        let isEdit = document.querySelector('input#action').value.includes("edit");
 
         try {
             this.validateFields();
 
             const transaction = this.formatValues();
-            Transaction.add(transaction);
+
+            if(isEdit) {
+                let index = Number(document.querySelector('input#action').value.replace(/\D/g, ''));
+                document.querySelector('input#action').value = "create";
+                Transaction.replace(transaction, index);
+            }else{
+                Transaction.add(transaction);
+            }
 
             this.clearFields();
 
@@ -147,9 +166,7 @@ const Form = {
 const App = {
     init(){
         DOM.updateBalance();
-        Transaction.all.forEach((item) => {
-            DOM.addTransaction(item);
-        })
+        Transaction.all.forEach((item, index) => DOM.addTransaction(item, index));
     },
     reload(){
         DOM.clearTransactions();
@@ -190,11 +207,12 @@ const DOM = {
     },
     addTransaction(transaction, index) {
         const tr = document.createElement('tr');
-        tr.innerHTML = this.innerHTMLTransaction(transaction);
+        tr.innerHTML = this.innerHTMLTransaction(transaction, index);
+        tr.dataset.index = index;
 
         this.transactionsContainer.appendChild(tr); // I used 'THIS'
     },
-    innerHTMLTransaction(transaction) {
+    innerHTMLTransaction(transaction, index) {
         const CSSClass = transaction.amount >= 0 ? 'income' : 'expense';
         const amount = Utils.formatCurrency(transaction.amount);
 
@@ -202,7 +220,10 @@ const DOM = {
                         <td class="description">${transaction.description}</td>
                         <td class="${CSSClass}">${amount}</td>
                         <td class="date">${transaction.date}</td>
-                        <td><img src="./assets/img/minus.svg" alt="Remover transação"></td>
+                        <td class="items">
+                        <i class="fas fa-pen" onclick="Transaction.edit(this)" data-position="${index}"></i>
+                            <img src="./assets/img/minus.svg" onclick="Transaction.remove(${index})" alt="Remover transação">
+                        </td>
                     `;
         return html;
     },
@@ -212,6 +233,10 @@ const DOM = {
         document.querySelector('div p#total-display').innerHTML = Utils.formatCurrency(Transaction.total());
     }
 }
+
+
+
+Storage.save();
 
 window.onload = () => App.configs(); 
 

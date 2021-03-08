@@ -16,10 +16,6 @@ A practical project applying knowledge acquired in the Rocketseat's Discover Cou
 * Some different ways to do the JavaScript code
 
 
-<p align="center">
-    <a align="center" href="https://smallpdf.com/shared#st=38abedfc-c54d-46ba-9652-51506ce833fe&fn=declaracao_20192009906.pdf&ct=1613187977193&tl=share-document&rf=link">Link with the aforementioned institution</a>
-</P>
-
 ## Technologies
 * [x] HTML
 * [x] CSS

@@ -26,4 +26,4 @@ A practical project applying knowledge acquired in the Rocketseat's Discover Cou
 * [x] JS
 
 ## Base project author
-Mayk Brito (Rocketseat's Discover course)
+Mayk Brito (Maratona discover)
